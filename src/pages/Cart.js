@@ -1,5 +1,6 @@
 import { useSelector,useDispatch } from "react-redux"
 import { remove } from "../store/cartSlice"
+import { Text } from '@chakra-ui/react'
 
 
 function Cart() {
@@ -13,6 +14,7 @@ function Cart() {
 
     return (
         <div>
+            {products.length===0?<Text fontSize='3xl'>Cart is empty</Text>:<Text fontSize='3xl'>Cart</Text>}
             <div className="cartWrapper">
                 {
                         products.map(product=>(
