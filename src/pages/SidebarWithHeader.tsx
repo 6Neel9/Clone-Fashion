@@ -32,8 +32,8 @@ import {
   FiSettings,
   FiMenu,
   FiChevronDown,
-  FiShoppingCart,
 } from "react-icons/fi";
+import {BsCart4} from 'react-icons/bs'
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 
@@ -43,11 +43,11 @@ interface LinkItemProps {
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome , nav:'/' },
-  { name: "Shoping Cart", icon: FiShoppingCart ,nav:'/cart' },
-  { name: "Explore", icon: FiCompass ,nav:'/' },
-  { name: "Favourites", icon: FiStar ,nav:'/'},
-  { name: "Settings", icon: FiSettings,nav:'/' },
+  { name: "Home", icon: FiHome, nav: "/" },
+  { name: "Shoping Cart", icon: BsCart4, nav: "/cart" },
+  { name: "Explore", icon: FiCompass, nav: "/" },
+  { name: "Favourites", icon: FiStar, nav: "/" },
+  { name: "Settings", icon: FiSettings, nav: "/" },
 ];
 
 interface SidebarProps extends BoxProps {
@@ -67,12 +67,11 @@ function SidebarWithHeader({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const CartClick = () => {
-    navigate("/cart",{ replace: true });
+    navigate("/cart", { replace: true });
   };
   const HomeClick = () => {
-    navigate("/",{ replace: true });
+    navigate("/", { replace: true });
   };
-
 
   const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     return (
@@ -102,7 +101,11 @@ function SidebarWithHeader({ children }: { children: ReactNode }) {
           />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} onClick={()=>navigate(link.nav)}>
+          <NavItem
+            key={link.name}
+            icon={link.icon}
+            onClick={() => navigate(link.nav)}
+          >
             {link.name}
           </NavItem>
         ))}
@@ -182,18 +185,15 @@ function SidebarWithHeader({ children }: { children: ReactNode }) {
           />
         </Text>
 
-        <HStack spacing={{ base: "0", md: "6" }}>
-          <Text color="tomato" >
-            {" "}
-            <IconButton
+        <HStack spacing={{ base: "0", md: "2" }}>
+          <IconButton
               size="lg"
               variant="ghost"
               aria-label="open menu"
-              icon={<FiShoppingCart />}
+              icon={<BsCart4 />}
               onClick={CartClick}
             />
-            {items.length}
-          </Text>
+          <Text className="cartCounter" >{items.length}</Text>
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton
